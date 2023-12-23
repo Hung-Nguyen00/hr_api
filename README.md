@@ -43,11 +43,13 @@ curl -X GET -H "Authorization: Token 99e62f577188e45652420c8e4c0e8496c0107200" h
 
 
 $$ Use Dockerfile to run app
-$ modify host of databse to host of db container in .env:
-    DATABASE_URL=postgres://postgres:123321@db:5432/postgres
+$ motify host name of the databse to be a host of db container in .envexample:
+    Example: DATABASE_URL=postgres://postgres:123321@db:5432/postgres
 $ Run docker-compose
+    $ docker-compose down
     $ docker-compose up --build
 
-## Display Fields configuration
-# I add display_feilds in Organization model. we can set it to show location, company, department, contacts
-# You can refer seed_data command: hr/employee/management/commands/seed_data.py
+$$ Display Fields configuration
+$ I add display_feilds in users.models.Organization model. we can set it to show location, company, department, contacts
+$ You can check in seed_data command: 
+    hr/employee/management/commands/seed_data.py
