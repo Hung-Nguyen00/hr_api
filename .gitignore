@@ -1,0 +1,9 @@
+.idea
+**/.env
+**/__pycache__
+db.sqlite3
+**/venv
+**/virtualenv
+**/venv
+.mypy_cache
+logs/

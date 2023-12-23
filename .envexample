@@ -1,0 +1,3 @@
+DEBUG=True
+SECRET_KEY=django-insecure-3(u1+zi!1b%&q^=@g(d^fqeq0zk_vlgm&9$8h7f+d4!t&4e7u=
+DATABASE_URL=postgres://postgres:123321@localhost:5432/postgres

@@ -43,4 +43,8 @@ curl -X GET -H "Authorization: Token 99e62f577188e45652420c8e4c0e8496c0107200" h
 
 ## Display Fields configuration
 # I add display_feilds in Organization model. we can set it to show location, company, department, contacts
+<<<<<<< Updated upstream
 # You can refer seed_data command: hr/employee/management/commands/seed_data.py
+=======
+# You can refer seed_data command: hr/employee/management/commands/seed_data.py
+>>>>>>> Stashed changes

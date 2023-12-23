@@ -1,0 +1,24 @@
+asgiref==3.7.2
+Django==3.2.23
+django-environ==0.11.2
+
+# drf
+django-model-utils==4.3.1
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0
+
+# fake data
+factory-boy==3.3.0
+Faker==18.13.0
+
+# db
+importlib-metadata==6.7.0
+psycopg2-binary==2.9.9
+
+PyJWT==2.8.0
+python-dateutil==2.8.2
+pytz==2023.3.post1
+six==1.16.0
+sqlparse==0.4.4
+typing-extensions==4.7.1
+zipp==3.15.0
