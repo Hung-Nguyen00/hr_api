@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres://postgres:123321@localhost:5432/postgres"),
+    "default": env.db("DATABASE_URL", default="postgres://postgres:123321@db:5432/postgres"),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DB_NAME_RUNNING_TEST = env("DB_NAME_RUNNING_TEST", default="hr_unit_test")
@@ -117,6 +117,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
         # other permission classes...
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': env.int("PAGE_SIZE", 10),
+    'PAGINATE_BY_PARAM': 'page_size',  # Allow the client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 500,  # Maximum limit allowed when using `?page_size=xxx`.
 }
 
 CACHES = {

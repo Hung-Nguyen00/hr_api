@@ -3,18 +3,19 @@ from employee.api.serializers import EmployeeSerializer
 from rest_framework.permissions import IsAuthenticated
 from employee.models import Employee
 from employee.constants import LIST_RELATION_DISPLAY, CONTACTS, POSITIONS
-from rest_framework.response import Response
 from employee.decorators import rate_limit
+from employee.pagination import CustomCursorPagination
 
 
 class EmployeeListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    ordering = ["-created"]
+    ordering = "-id"
+    pagination_class = CustomCursorPagination # using Cursor Pagination for large data set
 
     def get_serializer(self, *args, **kwargs):
-        fields_to_include = ['first_name', 'last_name', 'avatar', 'status']
+        fields_to_include = ['id', 'first_name', 'last_name', 'avatar', 'status']
     
         # logic here to determine the fields dynamically
         display_fields = self.request.user.organization.display_fields or []
@@ -78,5 +79,4 @@ class EmployeeListView(generics.ListAPIView):
     
     @rate_limit
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(self.get_queryset(), many=True)
-        return Response(serializer.data)
+        return self.list(request, *args, **kwargs)
