@@ -18,21 +18,14 @@ def rate_limit(view_func):
         cache_key = f'rate_limit:{get_client_ip(request)}'
 
         # Retrieve the current request count and timestamp from the cache
-        request_count, last_request_time = cache.get(cache_key, (0, None))
+        request_count = cache.get(cache_key, 0)
 
         # Check if the user has exceeded the rate limit
         if request_count >= RateLimitConfig.LIMIT:
             return HttpResponseForbidden("Rate limit exceeded")
 
-        # Check if the user is making requests too quickly
-        if last_request_time:
-            time_since_last_request = timezone.now() - last_request_time
-            if time_since_last_request < timezone.timedelta(seconds=RateLimitConfig.PERIOD):
-                cache.set(cache_key, (request_count + 1, timezone.now()), RateLimitConfig.PERIOD)
-                return HttpResponseForbidden("Rate limit exceeded")
-
         # Update the cache with the new request count and timestamp
-        cache.set(cache_key, (request_count + 1, timezone.now()), RateLimitConfig.PERIOD)
+        cache.set(cache_key, request_count + 1, RateLimitConfig.PERIOD)
 
         # Call the original view function
         return view_func(self, request, *args, **kwargs)
